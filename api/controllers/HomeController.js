@@ -15,11 +15,6 @@
  * @docs        :: http://sailsjs.org/#!documentation/controllers
  */
 
-var searchboxComponent = require('../../assets/components/Searchbox.jsx');
-var loginComponent = require('../../assets/components/Login.jsx');
-var tagsContainer = require('../../assets/components/TagsContainer.jsx');
-
-
 
 
 module.exports = { 
@@ -28,9 +23,9 @@ module.exports = {
 
 	index : function(req, res) {
 		req.W.request.action = 'index';
-		if (req.W.user) {
-			res.redirect('/dashboard');
-		}
+		// if (req.W.user) {
+		// 	res.redirect('/dashboard');
+		// }
 
 		res.view({ W: req.W });
 	},
@@ -38,7 +33,7 @@ module.exports = {
 
 	tweets_index: function(req, res) {
 		req.W.request.action = 'tweets_index';
-		res.view({W: req.W, searchboxComponent: reactHelpers.render(searchboxComponent, {})});
+		res.view({W: req.W});
 	},
 
 	dashboard: function(req, res) {
@@ -46,15 +41,16 @@ module.exports = {
 			res.redirect('/');
 		} else {
 			req.W.request.action = 'dashboard';
+								res.view({W: req.W});
 
-			Tag.find({user_id: req.W.user.id})
-				.then(function(tags) {
-					res.view({W: req.W, 
-							  data: {tags: tags},
-							  loginComponent: '',//reactHelpers.render(loginComponent, {user: req.W.user}, res), 
-							  tagsContainer: ''//reactHelpers.render(tagsContainer, {tags: tags}) 
-							});
-				});
+			// Tag.find({user_id: req.W.user.id})
+			// 	.then(function(tags) {
+			// 		res.view({W: req.W, 
+			// 				  data: {tags: tags},
+			// 				  loginComponent: '',//reactHelpers.render(loginComponent, {user: req.W.user}, res), 
+			// 				  tagsContainer: ''//reactHelpers.render(tagsContainer, {tags: tags}) 
+			// 				});
+			// 	});
 			
 		}
 	},

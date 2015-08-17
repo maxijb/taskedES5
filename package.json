@@ -32,7 +32,7 @@
   },
   "browserify-shim": {
     "jquery": "global:$",
-    "react": "global:React"
+    "angular": "global:angular"
   },
   "browserify": {
     "transform": [
