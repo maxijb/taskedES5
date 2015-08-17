@@ -1,0 +1,29 @@
+{
+  "Welcome": "Bienvenido",
+  "Regions" : "Regiones",
+  "Tools" : "Herramientas", 
+  "Reference" : "Referencia", 
+
+  "WeatherCodes": {
+  	  "SUN": "Promedio de luz solar diaria", 
+	  "DEW": "Average Dew Point",
+	  "EHU": "Average Evening Relative Humidity",
+	  "AHT": "Average High Temperature",
+	  "ALT": "Average Low Temperature",
+	  "MHU": "Average Morning Relative Humidity",
+	  "VHD": "Average Number of Days Above 90F - 32C",
+	  "VCD": "Average Number of Days Below 32F - 0C",
+	  "DWP": "Average Number of Days With Precipitation",
+	  "DWS": "Average Number of Days With Snow",
+	  "DWR": "Average Number of Rainy Days",
+	  "APR": "Average Precipitation",
+	  "AHU": "Average Relative Humidity",
+	  "ASN": "Average Snowfall",
+	  "ATE": "Average Temperature",
+	  "AWS": "Average Wind Speed",
+	  "HRT": "Highest Recorded Temperature",
+	  "LRM": "Least Rain Reported in a Month",
+	  "LRT": "Lowest Recorded Temperature",
+	  "HRM": "Most Rain Reported in a Month"
+  }
+}

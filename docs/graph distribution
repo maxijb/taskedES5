@@ -1,0 +1,90 @@
+Agrupacion de graficos
+Se tiene un objeto {ASN, DWS, ...}
+Cuando se usan se van quitando del objeto, para poder fijarse siempre si esta y si ya se uso
+
+
+PARA TODO EL ANO
+
+if solo hay 1 de temperatura y uno de precipitacion y no hay de humedad y no hay SUN
+	Group(ATE, APR)
+
+elseif hay 1 de temperatura y hay SUN
+	Group (ATE, SUN)
+
+elseif hay 1 de temperatura y hay AHU y hay 0 o mas de 1 de precipiatacion
+	Group (ATE, AHU)
+
+else
+	Group(Todo temperatura (barras solo si 1)
+
+	if APR && (DWR || DWP) && nieve && nieve +0
+		Group(APR, DWR, DWP, ASN, DWS)
+
+	elseif hay uno solo de precipiaction y hay luz de sol sin usar antes
+		Group(APR y SUN)
+	elseif hay uno solo de precipitacion y AHU
+		Group(precipaticion y AHU)
+
+	else 
+		Group precipitacion
+
+if (snow && snow+0)
+	Group(ASN, DWS)
+
+if (AHU no se uso)
+	if (solo 1 de humedad)
+		if AHU && SUN
+			Group(AHU, SUN)
+		if AHU && AWS
+		Group(AHU, AWS)
+	else
+		Group Humedad
+
+if (AWS)
+	if (SUN)
+		Group(AWS, SUN)
+	else 
+		Group(AWS)
+
+if (SUN) 
+	Group(SUN)
+
+
+
+
+
+
+
+
+
+POR MES
+if (ATE)
+	if ( AHT, ALT)
+		Group(ATE, AHT, ALT)
+	elseif (HRT, LLT)
+		Group(ATE, HRT, LRT)
+	else
+		Group(ATE)
+
+if (SUN)
+	Group(SUN)
+
+if (DWR || DWP)
+	Group(DWR, DWP)
+
+if (VHD && VHD+0)
+	Group VHD
+else if (VCD && VCD+0))
+	Group VCD
+
+if (APR || LRM || HRM)
+	Group(APR, LRM, HRM)
+
+if ((ASN && ASN+0) || (DWS && DWS+0))
+	Group(ASN, DWS)
+
+if (AWS)	
+	Group(AWS)
+
+if (alguno humedad)
+	Group(Todo Humedad)

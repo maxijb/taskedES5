@@ -1,0 +1,45 @@
+{
+  "name": "jade",
+  "private": true,
+  "version": "0.0.0",
+  "description": "a Sails application",
+  "dependencies": {
+    "sails": "0.9.16",
+    "grunt": "~0.4.1",
+    "sails-disk": "~0.9.0",
+    "sails-mysql": ">=0.9.9",
+    "ejs": "0.8.4",
+    "optimist": "0.3.4",
+    "jade": ">=1.3.1",
+    "grunt-contrib-jade": ">=0.12.0",
+    "grunt-string-replace": "^0.2.7",
+    "q": "^1.0.1",
+    "react": "^0.13.2",
+    "reactify": "1.1.1",
+    "lodash": "^3.10.0",
+    "object-assign": "^3.0.0"
+  },
+  "scripts": {
+    "start": "node app.js",
+    "debug": "node debug app.js"
+  },
+  "main": "app.js",
+  "repository": "",
+  "author": "",
+  "license": "",
+  "devDependencies": {
+    "browserify-shim": "^3.8.10"
+  },
+  "browserify-shim": {
+    "jquery": "global:$",
+    "react": "global:React"
+  },
+  "browserify": {
+    "transform": [
+      "browserify-shim"
+    ],
+    "options": {
+      "debug": false
+    }
+  }
+}
