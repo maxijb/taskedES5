@@ -4,6 +4,7 @@ angular.module('app-index', [])
   .constant('ENDPOINT_URI', 'https://noterious.firebaseio.com/')
   .config(function () {
   })
-  .controller("AppController", [require("./config")])
-  .run(require("./config"))
+  .controller("AppController", ['$scope', require("./controller")])
+  // .controller("AppController", ['$scope', function($scope) {} ])
+  .run(require("./run"))
 ;

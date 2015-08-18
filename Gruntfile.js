@@ -649,7 +649,6 @@ module.exports = function (grunt) {
     'jade:prodViewsCompile',
     'react:dynamic_mappings',
     'browserify:dist',
-    'browserify:main',
     'concat',
     'string-replace:cssUrls',
     'uglify',
