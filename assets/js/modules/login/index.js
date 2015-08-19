@@ -1,12 +1,22 @@
 angular.module('login', [])
-.controller('Controller', ['$scope', function($scope) {
-  $scope.customer = {
-    name: 'Naomi',
-    address: '1600 Amphitheatre'
-  };
+.controller('loginController', ['$scope', function($scope) {
+  $scope.user = W.user || {}
 }])
-.directive('myCustomer', function() {
+.directive('loginComponent', function() {
+	console.log(arguments);
   return {
-    template: 'Name: {{customer.name}} Address: {{customer.address}}'
-  };
+  	  // restrict: 'E',
+      // scope: {
+      // 		customer: '@'
+      // },
+      //   noteId: '@',
+      //   note:'=',
+      //   remove:'&'
+      // },
+      scope: {user: '='},
+      templateUrl: 'static/templates/login/login.html',
+      // template: "<div>{{customer}}</div>",
+      controller: 'loginController',
+      bindToController: true
+    }
 });

@@ -1,0 +1,7 @@
+div.button.button-login(ng-if="!user.name")
+	p
+	|{{'aa' + window.__('logInWithFacebook')}}
+	|{{'logInWithFacebook' | i18n:['maxi', 'max']}}
+	|sirve
+div.login-profile(ng-if="user.name")
+	.profile|{{user.name}}

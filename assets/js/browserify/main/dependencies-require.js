@@ -3,3 +3,4 @@
 // var uiRouter = require('angular-ui-router');
 
 var login = require("../../modules/login");
+var login = require("../../modules/helpers");
