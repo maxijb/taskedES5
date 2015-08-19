@@ -81,7 +81,7 @@ module.exports = function (grunt) {
   ];
 
 
-  /* Timestamp for versioning: path /public/-timestamp-/**whatever */
+  /* Timestamp for versioning: path /public/static/-timestamp-/**whatever */
   var fs = require('fs');
   var timestamp = grunt.file.read('.timestamp');
   // fs.readFile('config/timestamp', function(err, data) {
@@ -116,12 +116,12 @@ module.exports = function (grunt) {
 
   // Modify css file injection paths to use 
   cssFilesToInject = cssFilesToInject.map(function (path) {
-    return '.tmp/public/' + path;
+    return '.tmp/public/static/' + path;
   });
 
   // Modify js file injection paths to use 
   // jsFilesToInject = jsFilesToInject.map(function (path) {
-  //   return '.tmp/public/' + path;
+  //   return '.tmp/public/static/' + path;
   // });
 
 
@@ -158,7 +158,7 @@ module.exports = function (grunt) {
 
 
       return toInject.map(function (path) {
-          return '.tmp/public/' + timestamp +path;
+          return '.tmp/public/static/' + timestamp +path;
       });
   }
 
@@ -192,7 +192,7 @@ module.exports = function (grunt) {
       'string-replace': {
           cssUrls: {
             files: {
-              '.tmp/public/replaced/concat/production.css': '.tmp/public/' + timestamp + '/concat/production.css'
+              '.tmp/public/static/replaced/concat/production.css': '.tmp/public/static/' + timestamp + '/concat/production.css'
             }
             ,
             options: {
@@ -217,7 +217,7 @@ module.exports = function (grunt) {
           expand: true,
           cwd: './assets/templates',
           src: ['**/*.jade'],
-          dest: '.tmp/public/templates',
+          dest: '.tmp/public/static/templates',
           ext: '.html'
 
         },
@@ -230,7 +230,7 @@ module.exports = function (grunt) {
           expand: true,
           cwd: './views/',
           src: ['**/client/**/*.jade'],
-          dest: '.tmp/public/templates',
+          dest: '.tmp/public/static/templates',
           ext: '.html'
 
         },
@@ -244,7 +244,7 @@ module.exports = function (grunt) {
           expand: true,
           cwd: './assets/linker/templates',
           src: ['**/*.jade'],
-          dest: '.tmp/public/'+timestamp+'/linker/templates' ,
+          dest: '.tmp/public/static/'+timestamp+'/linker/templates' ,
           ext: '.js'
 
         },
@@ -257,7 +257,7 @@ module.exports = function (grunt) {
           expand: true,
           cwd: './views/',
           src: ['**/client/**/*.jade'],
-          dest: '.tmp/public/'+timestamp+'/linker/templates',
+          dest: '.tmp/public/static/'+timestamp+'/linker/templates',
           ext: '.js'
 
         }
@@ -273,7 +273,7 @@ module.exports = function (grunt) {
           expand: true,
           cwd: './assets',
           src: ['**/*.!(coffee)'],
-          dest: '.tmp/public' 
+          dest: '.tmp/public/static' 
         }
         ]
       },
@@ -283,7 +283,7 @@ module.exports = function (grunt) {
           expand: true,
           cwd: './assets',
           src: ['**/*.!(coffee)'],
-          dest: '.tmp/public/' + timestamp 
+          dest: '.tmp/public/static/' + timestamp 
         }
         ]
       }
@@ -292,7 +292,7 @@ module.exports = function (grunt) {
     clean: {
       dev: ['.tmp/public/**'],
       build: ['www'],
-      postConcat: ['.tmp/public/replaced', '.tmp/public/linker']
+      postConcat: ['.tmp/public/static/replaced', '.tmp/public/static/linker']
     },
 
     jst: {
@@ -306,7 +306,7 @@ module.exports = function (grunt) {
         // },
 
         files: {
-          '.tmp/public/jst.js': templateFilesToInject
+          '.tmp/public/static/jst.js': templateFilesToInject
         }
       }
     },
@@ -318,13 +318,13 @@ module.exports = function (grunt) {
           expand: true,
           cwd: 'assets/styles/',
           src: ['*.less'],
-          dest: '.tmp/public/styles/',
+          dest: '.tmp/public/static/styles/',
           ext: '.css'
         }, {
           expand: true,
           cwd: 'assets/linker/styles/',
           src: ['**/*.less'],
-          dest: '.tmp/public/linker/styles/',
+          dest: '.tmp/public/static/linker/styles/',
           ext: '.css'
         }
         ]
@@ -335,13 +335,13 @@ module.exports = function (grunt) {
           expand: true,
           cwd: 'assets/styles/',
           src: ['**/*.less'],
-          dest: '.tmp/public/'+timestamp+'/styles/',
+          dest: '.tmp/public/static/'+timestamp+'/styles/',
           ext: '.css'
         }, {
           expand: true,
           cwd: 'assets/linker/styles/',
           src: ['**/*.less'],
-          dest: '.tmp/public/'+timestamp+'/linker/styles/',
+          dest: '.tmp/public/static/'+timestamp+'/linker/styles/',
           ext: '.css'
         }
         ]
@@ -352,25 +352,25 @@ module.exports = function (grunt) {
     concat: {
       js: {
         src: jsFilesToInject(),
-        dest: '.tmp/public/'+timestamp+'/concat/production.js'
+        dest: '.tmp/public/static/'+timestamp+'/concat/production.js'
       },
       css: {
         src: cssFilesToInject,
-        dest: '.tmp/public/'+timestamp+'/concat/production.css'
+        dest: '.tmp/public/static/'+timestamp+'/concat/production.css'
       }
     },
 
     uglify: {
       dist: {
-        src: ['.tmp/public/'+timestamp+'/concat/production.js'],
-        dest: '.tmp/public/'+timestamp+'/min/production.js'
+        src: ['.tmp/public/static/'+timestamp+'/concat/production.js'],
+        dest: '.tmp/public/static/'+timestamp+'/min/production.js'
       }
     },
 
     cssmin: {
       dist: {
-        src: ['.tmp/public/replaced/concat/production.css'],
-        dest: '.tmp/public/'+timestamp+'/min/production.css'
+        src: ['.tmp/public/static/replaced/concat/production.css'],
+        dest: '.tmp/public/static/'+timestamp+'/min/production.css'
       }
     },
 
@@ -381,10 +381,10 @@ module.exports = function (grunt) {
     //       startTag: '<!--SCRIPTS-->',
     //       endTag: '<!--SCRIPTS END-->',
     //       fileTmpl: '<script src="'+timestamp+'/%s"></script>',
-    //       appRoot: '.tmp/public/' + timestamp
+    //       appRoot: '.tmp/public/static/' + timestamp
     //     },
     //     files: {
-    //       '.tmp/public/**/*.html': jsFilesToInject,
+    //       '.tmp/public/static/**/*.html': jsFilesToInject,
     //       'views/**/*.html': jsFilesToInject,
     //       'views/**/*.ejs': jsFilesToInject
     //     }
@@ -398,9 +398,9 @@ module.exports = function (grunt) {
     //       appRoot: '.tmp/public'
     //     },
     //     files: {
-    //       '.tmp/public/**/*.html': ['.tmp/public/min/production.js'],
-    //       'views/**/*.html': ['.tmp/public/min/production.js'],
-    //       'views/**/*.ejs': ['.tmp/public/min/production.js']
+    //       '.tmp/public/static/**/*.html': ['.tmp/public/static/min/production.js'],
+    //       'views/**/*.html': ['.tmp/public/static/min/production.js'],
+    //       'views/**/*.ejs': ['.tmp/public/static/min/production.js']
     //     }
     //   },
 
@@ -414,7 +414,7 @@ module.exports = function (grunt) {
 
     //     // cssFilesToInject defined up top
     //     files: {
-    //       '.tmp/public/**/*.html': cssFilesToInject,
+    //       '.tmp/public/static/**/*.html': cssFilesToInject,
     //       'views/**/*.html': cssFilesToInject,
     //       'views/**/*.ejs': cssFilesToInject
     //     }
@@ -428,9 +428,9 @@ module.exports = function (grunt) {
     //       appRoot: '.tmp/public'
     //     },
     //     files: {
-    //       '.tmp/public/index.html': ['.tmp/public/min/production.css'],
-    //       'views/**/*.html': ['.tmp/public/min/production.css'],
-    //       'views/**/*.ejs': ['.tmp/public/min/production.css']
+    //       '.tmp/public/static/index.html': ['.tmp/public/static/min/production.css'],
+    //       'views/**/*.html': ['.tmp/public/static/min/production.css'],
+    //       'views/**/*.ejs': ['.tmp/public/static/min/production.css']
     //     }
     //   },
 
@@ -443,9 +443,9 @@ module.exports = function (grunt) {
     //       appRoot: '.tmp/public'
     //     },
     //     files: {
-    //       '.tmp/public/index.html': ['.tmp/public/jst.js'],
-    //       'views/**/*.html': ['.tmp/public/jst.js'],
-    //       'views/**/*.ejs': ['.tmp/public/jst.js']
+    //       '.tmp/public/static/index.html': ['.tmp/public/static/jst.js'],
+    //       'views/**/*.html': ['.tmp/public/static/jst.js'],
+    //       'views/**/*.ejs': ['.tmp/public/static/jst.js']
     //     }
     //   },
 
@@ -483,10 +483,10 @@ module.exports = function (grunt) {
           startTag: '// SCRIPTS',
           endTag: '// SCRIPTS END',
           fileTmpl: 'script(type="text/javascript", src="/'+timestamp+'%s")',
-          appRoot: '.tmp/public/' + timestamp
+          appRoot: '.tmp/public/static/' + timestamp
         },
         files: {
-          'views/**/*.jade': ['.tmp/public/'+timestamp+'/min/production.js']
+          'views/**/*.jade': ['.tmp/public/static/'+timestamp+'/min/production.js']
         }
       },
 
@@ -519,10 +519,10 @@ module.exports = function (grunt) {
           startTag: '// STYLES',
           endTag: '// STYLES END',
           fileTmpl: 'link(rel="stylesheet", href="/'+timestamp+'%s")',
-          appRoot: '.tmp/public/' + timestamp
+          appRoot: '.tmp/public/static/' + timestamp
         },
         files: {
-          'views/**/*.jade': ['.tmp/public/'+timestamp+'/min/production.css']
+          'views/**/*.jade': ['.tmp/public/static/'+timestamp+'/min/production.css']
         }
       },
 
@@ -535,7 +535,7 @@ module.exports = function (grunt) {
       //     appRoot: '.tmp/public' 
       //   },
       //   files: {
-      //     'views/**/*.jade': ['.tmp/public/jst.js']
+      //     'views/**/*.jade': ['.tmp/public/static/jst.js']
       //   }
       // }
       /************************************
@@ -551,7 +551,7 @@ module.exports = function (grunt) {
             expand: true,
             cwd: 'assets/components',
             src: ['**/*.jsx'],
-            dest: '.tmp/public/components',
+            dest: '.tmp/public/static/components',
             ext: '.js'
           }
         ]
@@ -562,11 +562,11 @@ module.exports = function (grunt) {
     browserify: {
       dist: {
         files: {
-          '.tmp/public/linker/js/actions/index.js': [ '.tmp/public/js/browserify/index/**/*.js'],
-          '.tmp/public/linker/js/actions/dashboard.js': [ '.tmp/public/js/browserify/dashboard/**/*.js'],
-          '.tmp/public/linker/js/actions/account.js': [ '.tmp/public/js/browserify/account/**/*.js'],
-          '.tmp/public/linker/js/actions/extension.js': [ '.tmp/public/js/browserify/extension/**/*.js'],
-          '.tmp/public/linker/js/actions/main.js': [ '.tmp/public/js/browserify/main/**/*.js']
+          '.tmp/public/static/linker/js/actions/index.js': [ '.tmp/public/static/js/browserify/index/**/*.js'],
+          '.tmp/public/static/linker/js/actions/dashboard.js': [ '.tmp/public/static/js/browserify/dashboard/**/*.js'],
+          '.tmp/public/static/linker/js/actions/account.js': [ '.tmp/public/static/js/browserify/account/**/*.js'],
+          '.tmp/public/static/linker/js/actions/extension.js': [ '.tmp/public/static/js/browserify/extension/**/*.js'],
+          '.tmp/public/static/linker/js/actions/main.js': [ '.tmp/public/static/js/browserify/main/**/*.js']
 
         }
       }
