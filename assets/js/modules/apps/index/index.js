@@ -1,8 +1,8 @@
 'use strict';
 
-var uiRouter = require('angular-ui-router');
 
-angular.module('indexApp', ['ui.router'])
+
+angular.module('indexApp', ['ui.router', 'login'])
   .constant('ENDPOINT_URI', 'https://noterious.firebaseio.com/')
   .service("greeting", function() {
   	console.log('va el service');

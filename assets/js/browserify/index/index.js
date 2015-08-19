@@ -1,8 +1,10 @@
 /*
 * Behavior for index action
 */
-var angular = require("angular"),
-	indexApp = require("./../../modules/apps/index");
+var indexApp = require("./../../modules/apps/index");
+	
+
+
 
 
 W.modules.startup.index_action = (function($) {

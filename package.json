@@ -34,8 +34,7 @@
     "browserify-shim": "^3.8.10"
   },
   "browserify-shim": {
-    "jquery": "global:$",
-    "angular": "global:angular"
+    "jquery": "global:$"
   },
   "browserify": {
     "transform": [

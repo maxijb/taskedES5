@@ -1,13 +1,13 @@
 module.exports = function ($stateProvider, $urlRouterProvider) { 
     $urlRouterProvider.otherwise('/');
 
-    // $stateProvider
-    //   .state('login', {
-    //     url:'/login',
-    //     templateUrl: 'app/login/login.tmpl.html',
-    //     controller: 'LoginCtrl',
-    //     controllerAs: 'login'
-    //   })
+    $stateProvider
+      .state('Index', {
+        url:'/',
+        templateUrl: 'static/templates/index.html',
+        // controller: 'LoginCtrl',
+        // controllerAs: 'login'
+      })
     //   .state('boards', {
     //     url:'/boards',
     //     templateUrl: 'app/boards/boards-mdv.tmpl.html',
