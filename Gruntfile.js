@@ -211,27 +211,27 @@ module.exports = function (grunt) {
         compile: {
           options: {
 
-            client: true
+            client: false
           },
 
           expand: true,
-          cwd: './assets/linker/templates',
+          cwd: './assets/templates',
           src: ['**/*.jade'],
-          dest: '.tmp/public/linker/templates',
-          ext: '.js'
+          dest: '.tmp/public/templates',
+          ext: '.html'
 
         },
 
         viewsCompile:  {
           options: {
-            client: true
+            client: false
           },
 
           expand: true,
           cwd: './views/',
           src: ['**/client/**/*.jade'],
-          dest: '.tmp/public/linker/templates',
-          ext: '.js'
+          dest: '.tmp/public/templates',
+          ext: '.html'
 
         },
 

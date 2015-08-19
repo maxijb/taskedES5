@@ -17,7 +17,10 @@
     "react": "^0.13.2",
     "reactify": "1.1.1",
     "lodash": "^3.10.0",
-    "object-assign": "^3.0.0"
+    "object-assign": "^3.0.0",
+    "install": "^0.1.8",
+    "angular-ui-router": "^0.2.15",
+    "npm": "^2.13.5"
   },
   "scripts": {
     "start": "node app.js",

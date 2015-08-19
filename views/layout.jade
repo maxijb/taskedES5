@@ -7,7 +7,7 @@ doctype html
 <!--[if IE 8]><html class="ie ie8"><![endif]-->
 <!--[if IE 9]><html class="ie ie9"><![endif]-->
 <!--[if !IE]><!-->
-html(lang=W.lang,ng-app="app-"+W.request.action)
+html(lang=W.lang)
 	<!--<![endif]-->
 	head
 	
@@ -26,11 +26,12 @@ html(lang=W.lang,ng-app="app-"+W.request.action)
 			include cross/autogen/stylesNoCompress
 	
 
-	body(lang=W.lang, class=W.request.action)
+	body(lang=W.lang, class=W.request.action, ng-app=W.request.action+"App")
 		
 		#container
 			include cross/header
 			block body
+			
 			include cross/footer
 	
 		//- Generate global object on client
