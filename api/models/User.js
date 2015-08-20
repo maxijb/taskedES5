@@ -29,4 +29,12 @@ module.exports = {
     
   },
 
+  beforeCreate: function(values, cb) {
+
+    if (values.password) {
+      values.password = helpers.sha1sum(values.password);
+    }
+    cb();
+  },
+
 };

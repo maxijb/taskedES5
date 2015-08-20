@@ -1,23 +1,52 @@
 /**
- * NameController
+ * UserController
  *
  * @module      :: Controller
- * @description	:: A set of functions called `actions`.
+ * @description	:: Creates and handles user records. Login, signup, login by FB and 3rd parties
  *
- *                 Actions contain code telling Sails how to respond to a certain type of request.
- *                 (i.e. do stuff, then send some JSON, show an HTML page, or redirect to another URL)
- *
- *                 You can configure the blueprint URLs which trigger these actions (`config/controllers.js`)
- *                 and/or override them with custom routes (`config/routes.js`)
- *
- *                 NOTE: The code you write here supports both HTTP and Socket.io automatically.
- *
- * @docs        :: http://sailsjs.org/#!documentation/controllers
  */
 
 module.exports = {
     
   
+	/* Authenticate user 
+		@param idLogin : username o email
+		@param passwordLogin : password
+		@return user object 
+		@error code: not-found or database-error
+	*/
+	login: function(req, res) {
+		var id = req.param('idLogin'),
+			pass = helpers.sha1sum(req.param('passwordLogin'));
+
+		User.findOne()
+		.where({
+		  or : [
+		    { name: id },
+		    { email: id }
+		  ],
+		  password: pass
+		})
+		.then(function(user){
+			if (user) {
+			  setUserCookie(req, res, user);
+			  res.send(user);
+			} else {
+				res.send({error: "not-found"});
+			}
+		})
+		.catch(function(err){
+		  res.send({error: "database-error"});
+		});
+	},
+
+	/* Create new user 
+		@param name : username
+		@param email : email
+		@param password : password
+		@return user object 
+		@error code: not-found or database-error
+	*/
 	signup : function(req, res) {
 		User.create(req.params.all())
 			.then(function(item) {
@@ -33,15 +62,15 @@ module.exports = {
 
 
 	signup3rdParty : function(req, res) {
-		console.log(req.params.all());
-		User.find({type: req.param('type'), native_id: req.param('native_id')})
+		User.findOne({type: req.param('type'), native_id: req.param('native_id')})
 			.then(function(user) {
-				if (user && user.length) {
-
-					res.send(user[0]);
+				if (user) {
+					setUserCookie(req, res, user);
+					res.send(user);
 				} else {
 					User.create(req.params.all())
 						.then(function(item) {
+							setUserCookie(req, res, item);
 							res.send(item);
 						});
 				}
@@ -63,6 +92,6 @@ module.exports = {
 
 function setUserCookie(req, res, item) {
 	var ctx = req.cookies[sails.config.constants.cookieName];
-	ctx.user = item;
+	ctx.user = {name: item.name, id: item.id};
 	res.cookie(sails.config.constants.cookieName, ctx);
 }

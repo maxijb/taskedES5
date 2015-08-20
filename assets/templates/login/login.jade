@@ -5,15 +5,15 @@ div.login-profile(ng-if="user.name")
 	.profile|{{user.name}}
 
 
-.login-popup.modal-popup(ng-if="popup.visible")
+.login-popup.modal-popup(ng-if="popup.visible", ng-class="{loading : popup.loading}")
 	.content-popup
 		.login-popup-section
 			h5|{{'logInWithFacebookOrExistingAccount' | i18n}}
 			form
 				label|{{'usernameOrEmail' | i18n }}
-				input(type="text", ng-model="form.idLogin")
+				input(type="text", ng-model="formLogin.idLogin")
 				label|{{'password' | i18n }}
-				input(type="password", ng-model="form.passwordLogin")
+				input(type="text", ng-model="formLogin.passwordLogin")
 				a.button.primary-button(ng-click="loginForm()")|{{'login' | i18n }}
 
 		.login-popup-section

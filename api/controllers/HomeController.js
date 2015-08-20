@@ -17,11 +17,14 @@
 
 
 
+	
+
 module.exports = { 
     
   
 
 	index : function(req, res) {
+  		
 		req.W.request.action = 'index';
 		// if (req.W.user) {
 		// 	res.redirect('/dashboard');

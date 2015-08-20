@@ -95,3 +95,10 @@ function expandNumberedTranslations(prefix, start, end) {
 }
 
 
+
+/* Creates a sha1 hash from any object or string
+Return a 40length hexadecimal string */
+var crypto = require('crypto');
+exports.sha1sum = function(input){
+    return crypto.createHash('sha1').update(JSON.stringify(input)).digest('hex');
+}

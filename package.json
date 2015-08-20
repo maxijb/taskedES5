@@ -14,8 +14,6 @@
     "grunt-contrib-jade": ">=0.12.0",
     "grunt-string-replace": "^0.2.7",
     "q": "^1.0.1",
-    "react": "^0.13.2",
-    "reactify": "1.1.1",
     "lodash": "^3.10.0",
     "object-assign": "^3.0.0",
     "install": "^0.1.8",
@@ -31,7 +29,8 @@
   "author": "",
   "license": "",
   "devDependencies": {
-    "browserify-shim": "^3.8.10"
+    "browserify-shim": "^3.8.10",
+    "grunt-browserify": "^4.0.0"
   },
   "browserify-shim": {
     "jquery": "global:$"

@@ -181,7 +181,6 @@ module.exports = function (grunt) {
   grunt.loadTasks(depsPath + '/grunt-contrib-less/tasks');
   grunt.loadNpmTasks('grunt-contrib-jade');
   grunt.loadNpmTasks('grunt-string-replace');
-  grunt.loadNpmTasks('grunt-react');
   grunt.loadNpmTasks('grunt-browserify');
 
   // Project configuration.
@@ -543,22 +542,7 @@ module.exports = function (grunt) {
        ************************************/
     },
 
-    react: {
-      
-      dynamic_mappings: {
-        files: [
-          {
-            expand: true,
-            cwd: 'assets/components',
-            src: ['**/*.jsx'],
-            dest: '.tmp/public/static/components',
-            ext: '.js'
-          }
-        ]
-      }
-    },
-
-
+    
     browserify: {
       dist: {
         files: {
@@ -608,7 +592,6 @@ module.exports = function (grunt) {
     'jst:dev',
     'less:dev',
     'copy:dev',    
-    'react:dynamic_mappings',
     'browserify:dist',
     'jade:compile',
     'jade:viewsCompile'
@@ -647,7 +630,6 @@ module.exports = function (grunt) {
     'copy:build',
     'jade:prodCompile',
     'jade:prodViewsCompile',
-    'react:dynamic_mappings',
     'browserify:dist',
     'concat',
     'string-replace:cssUrls',
