@@ -1,7 +1,32 @@
 div.button.button-login(ng-if="!user.name")
 	p
-	|{{'aa' + window.__('logInWithFacebook')}}
-	|{{'logInWithFacebook' | i18n:['maxi', 'max']}}
-	|sirve
+		a(ng-click="openPopup();")|{{'login/signup' | i18n }}
 div.login-profile(ng-if="user.name")
 	.profile|{{user.name}}
+
+
+.login-popup.modal-popup(ng-if="popup.visible")
+	.content-popup
+		.login-popup-section
+			h5|{{'logInWithFacebookOrExistingAccount' | i18n}}
+			form
+				label|{{'usernameOrEmail' | i18n }}
+				input(type="text", ng-model="form.idLogin")
+				label|{{'password' | i18n }}
+				input(type="password", ng-model="form.passwordLogin")
+				a.button.primary-button(ng-click="loginForm()")|{{'login' | i18n }}
+
+		.login-popup-section
+			h5|{{'createAccount' | i18n}}
+			form
+				label|{{'name' | i18n }}
+				input(type="text", ng-model="form.name")
+				label|{{'email' | i18n }}
+				input(type="text", ng-model="form.email")
+				label|{{'confirmEmail' | i18n }}
+				input(type="text", ng-model="form.confirmEmail")
+				label|{{'password' | i18n }}
+				input(type="password", ng-model="form.password")
+				a.button.primary-button(ng-click="createForm()")|{{'create' | i18n }}
+		
+		a.button.cancel-button(ng-click="resetPopup()")|{{'cancel' | i18n }}

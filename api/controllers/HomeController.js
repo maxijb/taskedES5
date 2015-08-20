@@ -26,7 +26,7 @@ module.exports = {
 		// if (req.W.user) {
 		// 	res.redirect('/dashboard');
 		// }
-
+		// req.W.user = {name: "Maximiliano BEnedetto"};
 		res.view({ W: req.W });
 	},
 

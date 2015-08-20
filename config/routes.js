@@ -42,6 +42,16 @@ module.exports.routes = {
     action: 'dashboard'
   },
 
+  '/user/signup3rdParty' : {
+    controller: 'UserController',
+    action: 'signup3rdParty'
+  },
+
+  '/user/login' : {
+    controller: 'UserController',
+    action: 'login'
+  },
+
   '/user/signup' : {
     controller: 'UserController',
     action: 'signup'

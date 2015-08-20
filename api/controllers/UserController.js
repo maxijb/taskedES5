@@ -18,8 +18,21 @@
 module.exports = {
     
   
-
 	signup : function(req, res) {
+		User.create(req.params.all())
+			.then(function(item) {
+
+        		setUserCookie(req, res, item);
+				res.send(item);
+
+
+		}, function(error) {
+			res.send({errors: ["database-error"]});
+		});
+	},
+
+
+	signup3rdParty : function(req, res) {
 		console.log(req.params.all());
 		User.find({type: req.param('type'), native_id: req.param('native_id')})
 			.then(function(user) {
@@ -45,3 +58,11 @@ module.exports = {
 
   
 };
+
+
+
+function setUserCookie(req, res, item) {
+	var ctx = req.cookies[sails.config.constants.cookieName];
+	ctx.user = item;
+	res.cookie(sails.config.constants.cookieName, ctx);
+}
