@@ -13,28 +13,43 @@ module.exports = {
   autoPK: false,
   autoCreatedAt: false,
   autoUpdatedAt: false,
+  
+  
 
   attributes: {
   	id: {
         type:"integer",
         unique: true
     },
-    name: 'STRING',
+    name: {
+      type: 'STRING',
+      required: 'true'
+    },
     icon: 'STRING',
     signup: 'timestamp',
-    email: 'string',
+    email: 'email',
+    
     type: 'STRING',
     native_id: "STRING",
-    password: "STRING"
+    password: {
+      type: "STRING",
+      minLength: 6
+    }
     
   },
 
   beforeCreate: function(values, cb) {
+    if (values.email != values.confirmEmail) {
+      return cb("invalidConfirmation");
+    } 
 
     if (values.password) {
       values.password = helpers.sha1sum(values.password);
     }
     cb();
   },
+
+
+
 
 };

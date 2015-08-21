@@ -8,13 +8,16 @@
 
 module.exports = {
 
-
+	/** Resets the user in the cookie, login out efectively */
 	logout: function(req, res) {
-		console.log("KOKO");
 		setUserCookie(req, res, null);
 		res.send({});
 	},
 
+
+	/* Quickly check if this name is been used
+		@return status: boolean to the client
+	*/
 	checkName: function(req, res) {
 		var name = req.param('name');
 		if (!name) return res.send({status: false});
@@ -49,11 +52,11 @@ module.exports = {
 			  setUserCookie(req, res, user);
 			  res.send(user);
 			} else {
-				res.send({error: "not-found"});
+				returnError(res, "notFound");
 			}
 		})
 		.catch(function(err){
-		  res.send({error: "database-error"});
+		  returnError(res, "databaseError");
 		});
 	},
 
@@ -62,22 +65,54 @@ module.exports = {
 		@param email : email
 		@param password : password
 		@return user object 
-		@error code: not-found or database-error
+		@error code: notFound or databaseError
 	*/
 	signup : function(req, res) {
-		User.create(req.params.all())
-			.then(function(item) {
-
-        		setUserCookie(req, res, item);
-				res.send(item);
+		var name = req.param('name'),
+			email = req.param('email');
 
 
-		}, function(error) {
-			res.send({errors: ["database-error"]});
+		User.findOne()
+		.where({
+		  or : [
+		    { name: name },
+		    { email: email }
+		  ]
+		})
+		.then(function(user){
+			if (user) {
+
+				if (user.name == name) {
+					returnError(res, "usedName");
+				} else if (user.email == email) {
+					returnError(res, "usedEmail");
+				}
+
+			} else {
+
+				User.create(req.params.all())
+					.then(function(item) {
+		        		setUserCookie(req, res, item);
+						res.send(item);
+				}, function(error) {
+					if (typeof error == "string") {
+						returnError(res, error);
+					} else {
+						returnError(res, "databaseError");
+					}
+				});
+
+			}
 		});
+
 	},
 
 
+	/*
+	Logs in users with a 3rd party (FB)
+	Checks if the account exits, otherwise it creates it
+	TODO: check if email exists and update in that case
+	*/
 	signup3rdParty : function(req, res) {
 		User.findOne({type: req.param('type'), native_id: req.param('native_id')})
 			.then(function(user) {
@@ -105,8 +140,30 @@ module.exports = {
   
 };
 
+/* 
+Sends an error to the client in the format of {errors: {errorName: 1}}
+@param error : can be a string or an array
+*/
+function returnError(res, error) {
+	console.log('manda errrores');
+	var errors = {};
+	if (typeof error == "object") {
+		for (var i = 0; i < error.length; i++) {
+			errors[error[i]] = 1;
+		}
+	} else if (error) {
+		errors[error] = 1;
+	}
+	res.send({errors: errors});
+}
 
 
+/*
+Sets this user as the one in the cookie
+It can be null
+@param req, res : regular expresss objects
+@param item: user object or null
+*/
 function setUserCookie(req, res, item) {
 	var ctx = req.cookies[sails.config.constants.cookieName];
 	ctx.user = item ? {name: item.name, id: item.id} : null;
