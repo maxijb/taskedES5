@@ -7,7 +7,7 @@ W.modules.startup.all_actions = (function($) {
 
 	
 
-		init = function() {
+		var init = function() {
 
 
 		}

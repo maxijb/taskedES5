@@ -11,7 +11,7 @@ W.modules.startup.index_action = (function($) {
 
 	
 
-		init = function() {
+		var init = function() {
 
 
 
