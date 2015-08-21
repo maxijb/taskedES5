@@ -14,7 +14,7 @@ div.login-profile(ng-if="user.name")
 				input(type="text", ng-model="formLogin.idLogin")
 				label|{{'password' | i18n }}
 				input(type="text", ng-model="formLogin.passwordLogin")
-				a.button.primary-button(ng-click="loginForm()")|{{'login' | i18n }}
+				action-button(action="loginForm()", text="login", type='primary')
 
 		.login-popup-section
 			h5|{{'createAccount' | i18n}}
@@ -27,6 +27,6 @@ div.login-profile(ng-if="user.name")
 				input(type="text", ng-model="form.confirmEmail")
 				label|{{'password' | i18n }}
 				input(type="password", ng-model="form.password")
-				a.button.primary-button(ng-click="createForm()")|{{'create' | i18n }}
+				action-button(action="createForm()", text="create", type='primary')
 		
-		a.button.cancel-button(ng-click="resetPopup()")|{{'cancel' | i18n }}
+		action-button(action="resetPopup()", text="cancel", type='cancel')

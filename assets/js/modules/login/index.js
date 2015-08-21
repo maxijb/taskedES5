@@ -3,18 +3,10 @@ angular.module('login', [])
 .service('loginService', ['$rootScope', '$http', require('./service')])
 .directive('loginComponent', function() {
   return {
-  	  // restrict: 'E',
-      // scope: {
-      // 		customer: '@'
-      // },
-      //   noteId: '@',
-      //   note:'=',
-      //   remove:'&'
-      // },
+  	  restrict: 'EA',
       scope: true,
-      templateUrl: 'static/templates/login/login.html',
-      // template: "<div>{{customer}}</div>",
+      templateUrl: 'static/templates/modules/login/login.html',
       controller: 'loginController',
       bindToController: true
     }
-});
+})

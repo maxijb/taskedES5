@@ -2,7 +2,7 @@
 
 
 
-angular.module('indexApp', ['ui.router', 'login', 'helpers'])
+angular.module('indexApp', ['ui.router', 'login', 'helpers', 'buttons'])
   .constant('ENDPOINT_URI', 'https://noterious.firebaseio.com/')
   .service("greeting", function() {
   	console.log('va el service');
