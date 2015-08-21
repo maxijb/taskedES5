@@ -7,6 +7,23 @@
  */
 
 module.exports = {
+
+
+	logout: function(req, res) {
+		console.log("KOKO");
+		setUserCookie(req, res, null);
+		res.send({});
+	},
+
+	checkName: function(req, res) {
+		var name = req.param('name');
+		if (!name) return res.send({status: false});
+
+		User.findOne({name: name})
+		.then(function(user) {
+			res.send({status: !!user});
+		});
+	},
     
   
 	/* Authenticate user 
@@ -92,6 +109,7 @@ module.exports = {
 
 function setUserCookie(req, res, item) {
 	var ctx = req.cookies[sails.config.constants.cookieName];
-	ctx.user = {name: item.name, id: item.id};
+	ctx.user = item ? {name: item.name, id: item.id} : null;
+	console.log(ctx);
 	res.cookie(sails.config.constants.cookieName, ctx);
 }
