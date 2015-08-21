@@ -1,6 +1,6 @@
 div.button.button-login(ng-if="!user.name")
 	p
-		a(ng-click="openPopup();")|{{'login/signup' | i18n }}
+		a(ng-click="ctrl.openPopup();")|{{'login/signup' | i18n }}
 div.login-profile(ng-if="user.name")
 	.profile|{{user.name}}
 
@@ -14,7 +14,7 @@ div.login-profile(ng-if="user.name")
 				input(type="text", ng-model="formLogin.idLogin")
 				label|{{'password' | i18n }}
 				input(type="text", ng-model="formLogin.passwordLogin")
-				action-button(action="loginForm()", text="login", type='primary')
+				action-button(action="ctrl.loginForm()", text="login", type='primary')
 
 		.login-popup-section
 			h5|{{'createAccount' | i18n}}
@@ -27,6 +27,6 @@ div.login-profile(ng-if="user.name")
 				input(type="text", ng-model="form.confirmEmail")
 				label|{{'password' | i18n }}
 				input(type="password", ng-model="form.password")
-				action-button(action="createForm()", text="create", type='primary')
+				action-button(action="ctrl.createForm()", text="create", type='primary')
 		
-		action-button(action="resetPopup()", text="cancel", type='cancel')
+		action-button(action="ctrl.resetPopup()", text="cancel", type='cancel')
