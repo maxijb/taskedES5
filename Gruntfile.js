@@ -545,6 +545,13 @@ module.exports = function (grunt) {
     
     browserify: {
       dist: {
+        options: {
+               transform: [
+                  ["babelify", {
+                     loose: "all"
+                  }]
+               ]
+            },
         files: {
           '.tmp/public/static/linker/js/actions/index.js': [ '.tmp/public/static/js/browserify/index/**/*.js'],
           '.tmp/public/static/linker/js/actions/dashboard.js': [ '.tmp/public/static/js/browserify/dashboard/**/*.js'],

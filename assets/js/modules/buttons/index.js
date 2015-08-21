@@ -8,7 +8,7 @@ angular.module('buttons', [])
           action: '&',
           type: '@'
       },
-      templateUrl: 'static/templates/modules/buttons/action-button.html',
+      templateUrl: 'static/templates/modules/buttons/action-button.html'
     }
 });
 

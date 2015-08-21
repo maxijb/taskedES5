@@ -30,7 +30,8 @@
   "license": "",
   "devDependencies": {
     "browserify-shim": "^3.8.10",
-    "grunt-browserify": "^4.0.0"
+    "grunt-browserify": "^4.0.0",
+    "babelify": "^6.2.0"
   },
   "browserify-shim": {
     "jquery": "global:$"
